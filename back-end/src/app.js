@@ -7,6 +7,7 @@ server.use(cors())
 
 const users = [];
 const tweets = [];
+const avatars = [];
 
 server.get("/tweets", (req, res) => {
     res.send(tweets)
@@ -15,7 +16,8 @@ server.get("/tweets", (req, res) => {
 server.post("/sign-up", (req, res) => {
     const username = req.body.username
     const avatar = req.body.avatar
-    users.push({username, avatar})
+    users.push(username)
+    avatars.push({username, avatar})
     res.status(201).send("OK")
 })
 
@@ -23,8 +25,8 @@ server.post("/tweets", (req, res) => {
     const dados = req.body
 
     if (users.includes(dados.username)) {
-        console.log("validado")
-        tweets.push(dados.tweet)
+        console.log("Usuário Cadastrado")
+        tweets.push(dados)
         res.status(201).send("OK")
     } else {
         res.status(401).send('UNAUTHORIZED')
