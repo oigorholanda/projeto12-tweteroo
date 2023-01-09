@@ -1,18 +1,21 @@
 import express from 'express'
+import cors from 'cors'
 
 const server = express()
 server.use(express.json())
+server.use(cors())
 
 const users = [];
 const tweets = [];
 
 server.get("/tweets", (req, res) => {
-    res.send("Requisição completa desse endpoint")
+    res.send(tweets)
 })
 
 server.post("/sign-up", (req, res) => {
-    const dados = req.body
-    users.push(dados.username)
+    const username = req.body.username
+    const avatar = req.body.avatar
+    users.push({username, avatar})
     res.status(201).send("OK")
 })
 
