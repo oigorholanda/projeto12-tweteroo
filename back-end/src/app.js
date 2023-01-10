@@ -28,7 +28,7 @@ server.post("/tweets", (req, res) => {
 
     if (users.includes(username)) {
         
-        tweets.push({
+        tweets.unshift({
             username,
             avatar: usersFind.avatar, 
             tweet })
@@ -40,8 +40,7 @@ server.post("/tweets", (req, res) => {
 
 server.get("/tweets", (req, res) => {
 
-
-    res.send(tweets.slice(-10, tweets.length))
+    res.send(tweets.slice(0, 10))
 })
 
 
